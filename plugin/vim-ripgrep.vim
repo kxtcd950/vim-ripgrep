@@ -39,10 +39,12 @@ endfun
 fun! s:RgSearch(txt)
   silent! exe 'grep! ' . a:txt
   if len(getqflist())
-    exe g:rg_window_location 'copen'
-    redraw!
-    if exists('g:rg_highlight')
-      call s:RgHighlight(a:txt)
+    if g:rg_window_location != 'none'
+       exe g:rg_window_location 'copen'
+       redraw!
+       if exists('g:rg_highlight')
+         call s:RgHighlight(a:txt)
+       endif
     endif
   else
     cclose
